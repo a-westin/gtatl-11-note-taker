@@ -44,3 +44,12 @@ app.post("/api/notes", function (req, res) {
   });
   res.json(JSON.parse(newNoteData));
 });
+
+app.delete("/api/notes/:id", function (req, res) {
+  const deletedNote = req.params.id;
+  newNoteData = fs.readFileSync("./db/db.json", "utf-8");
+  newNoteData = JSON.parse(newNoteData);
+  newNoteData = newNoteData.filter(function (note) {
+    return note.id != deletedNote;
+  });
+});
