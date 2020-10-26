@@ -15,3 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 app.listen(PORT, function () {
   console.log(`Listening on Port: ${PORT}`);
 });
+
+// Getting index.html file
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
