@@ -20,3 +20,8 @@ app.listen(PORT, function () {
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
+
+// Getting notes.html file
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "public", "notes.html"));
+});
