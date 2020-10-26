@@ -6,3 +6,12 @@ const path = require("path");
 // Creating a port, setting up express
 const app = express();
 const PORT = process.env.PORT || 8080;
+
+app.use(express.json());
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
+
+// Starting the server
+app.listen(PORT, function () {
+  console.log(`Listening on Port: ${PORT}`);
+});
