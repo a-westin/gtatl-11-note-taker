@@ -22,7 +22,7 @@ app.get("/", function (req, res) {
 });
 
 // Getting notes.html file
-app.get("/", function (req, res) {
+app.get("/notes", function (req, res) {
   res.sendFile(path.join(__dirname, "public", "notes.html"));
 });
 
@@ -52,4 +52,9 @@ app.delete("/api/notes/:id", function (req, res) {
   newNoteData = newNoteData.filter(function (note) {
     return note.id != deletedNote;
   });
+  newNoteData = JSON.stringify(newNoteData);
+  fs.writeFile("./db/db.json", newNoteData, "utf-8", (err) => {
+    if (err) throw err;
+  });
+  res.json(JSON.parse(newNoteData));
 });
