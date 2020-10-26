@@ -30,3 +30,17 @@ app.get("/", function (req, res) {
 app.get("/api/notes", function (req, res) {
   return res.sendFile(path.join(__dirname, "db/db.json"));
 });
+
+// Saving notes that the user adds and renders them
+app.post("/api/notes", function (req, res) {
+  const newNote = req.body;
+  newNoteData = fs.readFileSync("./db/db.json", "utf-8");
+  newNoteData = JSON.parse(newNoteData);
+  newNote.id = newNoteData.length;
+  newNoteData.push(newNote);
+  newNoteData = JSON.stringify(newNoteData);
+  fs.writeFile("./db/db.json", newNoteData, "utf-8", (err) => {
+    if (err) throw err;
+  });
+  res.json(JSON.parse(newNoteData));
+});
